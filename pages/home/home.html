@@ -1,0 +1,35 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<a class="ml-5" href="/naam">Naaam</a>
+{% for doc in docs %}
+{{doc.docname}}
+{{doc.pats}}
+{% endfor %}
+<a href="/clear">Clear All</a>
+
+<div class="container bg-secondary my-3">
+  {% if docs|length %}
+    <form action="/registration" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input type="text" name="fname" placeholder="Enter your First name" class="form-control" id="firstname">
+        </div>
+        <div class="form-group">
+          <label for="lastname">Last Name</label>
+          <input type="text" name="lname" placeholder="Enter your Last name" class="form-control" id="lastname">
+        </div>
+        <!-- <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div> -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+  {% else %}
+  <p>Sorry We are out of doctors...Die somewhere else</p>
+  {% endif %}
+
+</div>
+
+{% endblock %}
